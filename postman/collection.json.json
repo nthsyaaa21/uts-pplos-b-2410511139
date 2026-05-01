@@ -1,0 +1,791 @@
+{
+  "info": {
+    "_postman_id": "3c204601-4946-45f3-8da1-b88c418419ee",
+    "name": "UTS PPLOS - Booking Lapangan 2410511139",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52814591",
+    "_collection_link": "https://go.postman.co/collection/52814591-3c204601-4946-45f3-8da1-b88c418419ee?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Nathasya Herdaningsih\",\r\n  \"email\": \"nathasya2112@gmail.com\",\r\n  \"password\": \"natnitnut21\",\r\n  \"role\": \"user\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"nathasya2112@gmail.com\",\r\n  \"password\": \"natnitnut21\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0NTI2OCwiZXhwIjoxNzc3NjQ2MTY4fQ.9-OEVGz06Q6eDb8R3jqoEZOuChqsKDmB21JaXP01O1U",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/auth/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0NjQwNCwiZXhwIjoxNzc3NjQ3MzA0fQ.YaOywNq78XdEr97ddfwXGGirlz0tY5JkBKnKEcdV5l0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImlhdCI6MTc3NzY0Njc0OSwiZXhwIjoxNzc4MjUxNTQ5fQ.6ZGjPb27mdzmB_GPIC084-qte9Ln5lwIVaCI6dbfBC0\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0Njc0OSwiZXhwIjoxNzc3NjQ3NjQ5fQ.XN2HiSVW5C_auNwwu94iFcEQhka83XTiI1X6tF8JfTU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImlhdCI6MTc3NzY0Njc0OSwiZXhwIjoxNzc4MjUxNTQ5fQ.6ZGjPb27mdzmB_GPIC084-qte9Ln5lwIVaCI6dbfBC0\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "github",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/auth/oauth/github",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "oauth",
+                "github"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Fields",
+      "item": [
+        {
+          "name": "Tambah Lapangan",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0ODQ1MSwiZXhwIjoxNzc3NjQ5MzUxfQ.j6izUa-iXwXS4loZBNeOHxo-UPeFTP0fYxfk1Sicnoo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Lapangan Basket Jaya\",\r\n  \"type\": \"Basket\",\r\n  \"location\": \"Jl. Tanah Kusir No. 11, Jakarta\",\r\n  \"price_per_hour\": 130000,\r\n  \"description\": \"Lapangan Basket Sangat Bersih\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/fields",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Lapangan",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0ODc2OCwiZXhwIjoxNzc3NjQ5NjY4fQ.j_WOGAfwvxp0-5gkjlM9BRduj1VHsNwn2kr3GHWDDb0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/fields?page=1&per_page=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Lapangan",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0OTEwNSwiZXhwIjoxNzc3NjUwMDA1fQ.SFGiYsMroc-HId8EAdBWtsOZYX4v55FQ9W25m9e2fhU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/fields?page=1&per_page=10&type=Basket",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                },
+                {
+                  "key": "type",
+                  "value": "Basket"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detail lapangan",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0OTQ1MSwiZXhwIjoxNzc3NjUwMzUxfQ.lMIB1KX0IwHWHQ_Vu9dQ-SjYaQc6qBZtapedeTT_ioc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Lapangan Basket Jaya\",\r\n  \"type\": \"Basket\",\r\n  \"location\": \"Jl. Tanah Kusir No. 11, Jakarta\",\r\n  \"price_per_hour\": 130000,\r\n  \"description\": \"Lapangan Basket Sangat Bersih\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/fields/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update lapangan",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0OTc4MCwiZXhwIjoxNzc3NjUwNjgwfQ.X3ErZJaUtbJ7kKNfGfDXUNhF4hEFX3_sUhQFsjARbnA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Lapangan Basket B Updated\",\r\n  \"type\": \"Basket\",\r\n  \"location\": \"Jakarta Selatan\",\r\n  \"price_per_hour\": 175000,\r\n  \"description\": \"Lapangan Basket indoor - renovasi baru\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/fields/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete lapangan",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY0OTk3MSwiZXhwIjoxNzc3NjUwODcxfQ.Her230-d4bo5uE6DwSQm9Vx4bLwIulZY25GPIVS3Hew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Lapangan Basket B Updated\",\r\n  \"type\": \"Basket\",\r\n  \"location\": \"Jakarta Selatan\",\r\n  \"price_per_hour\": 175000,\r\n  \"description\": \"Lapangan Basket indoor - renovasi baru\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/fields/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "tambah slot",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY1MDIwMCwiZXhwIjoxNzc3NjUxMTAwfQ.AbRUuVbtJARiBqgRaGUA0Fta0HssUO9GkDNpKOGub-4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"field_id\": 1,\r\n  \"day_of_week\": \"Senin\",\r\n  \"start_time\": \"08:00\",\r\n  \"end_time\": \"09:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/fields/1/slots",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields",
+                "1",
+                "slots"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list slot",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY1MDY5MywiZXhwIjoxNzc3NjUxNTkzfQ.V21z6JDbSd2Emnj-Z7E0_-6jghhG7F4YsEtS5-Ub5mo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/fields/1/slots?page=1&per_page=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "fields",
+                "1",
+                "slots"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY1MTExMCwiZXhwIjoxNzc3NjUyMDEwfQ.6ueG1_TwnEU-6vkS0zXIu-evuq3E5uQXEXQ4rfxLYJI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"field_id\": 1,\r\n  \"slot_id\": 1,\r\n  \"booking_date\": \"2026-05-02\",\r\n  \"dp_amount\": 50000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/bookings",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detail Booking",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY2Mjk5OSwiZXhwIjoxNzc3NjYzODk5fQ.2QX_OELYU8nXq2Q7z4w4nNJZ_ZtIm9HUKgooOnAEbK4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/bookings/88fcbdf5-430b-4347-b6e8-21d81a84f77e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings",
+                "88fcbdf5-430b-4347-b6e8-21d81a84f77e"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bayar DP",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY2MzcxOSwiZXhwIjoxNzc3NjY0NjE5fQ.PFqS8-Q3ipTV_Ed9nqBRpHt5yLarKkVI6rsgM2rdFd0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"amount\": 50000,\r\n  \"payment_method\": \"transfer\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/bookings/88fcbdf5-430b-4347-b6e8-21d81a84f77e/payment/dp",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings",
+                "88fcbdf5-430b-4347-b6e8-21d81a84f77e",
+                "payment",
+                "dp"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bayar Lunas",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY2NDU2OCwiZXhwIjoxNzc3NjY1NDY4fQ.sK3XgL7xCoexvmmT-pHf2DlEGNbnMtl2RCP3uD04HjU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"amount\": 100000,\r\n  \"payment_method\": \"transfer\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/bookings/88fcbdf5-430b-4347-b6e8-21d81a84f77e/payment/full",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings",
+                "88fcbdf5-430b-4347-b6e8-21d81a84f77e",
+                "payment",
+                "full"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY2NDYyOCwiZXhwIjoxNzc3NjY1NTI4fQ.BYa0DevCjmeBiS4KlPSWdBHwkXZh7OD4IKzK079yDaM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/bookings/88fcbdf5-430b-4347-b6e8-21d81a84f77e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings",
+                "88fcbdf5-430b-4347-b6e8-21d81a84f77e"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Dashbord Owner",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzYWRmY2U1LTIyOTYtNDRjNi04ZGQxLWU1ZTM1MDc1ZTJmMSIsImVtYWlsIjoibmF0aGFzeWEyMTEyQGdtYWlsLmNvbSIsImlhdCI6MTc3NzY2NDY3NiwiZXhwIjoxNzc3NjY1NTc2fQ.Q5S1QXmgNdhlY_NBWYiQIRm-QVjEdz9rEGtIpFzswRE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/bookings/dashboard",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base-url",
+      "value": ""
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    }
+  ]
+}
