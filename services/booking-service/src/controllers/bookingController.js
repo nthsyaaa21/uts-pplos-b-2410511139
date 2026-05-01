@@ -1,32 +1,67 @@
-const db = require('../config/db');
+const { v4: uuidv4 } = require('uuid');
+const bookingModel = require('../models/bookingModel');
+const paymentModel = require('../models/paymentModel');
+const axios = require('axios');
+require('dotenv').config();
 
-const createBooking = async (id, userId, fieldId, slotId, bookingDate) => {
-  await db.query(
-    'INSERT INTO bookings (id, user_id, field_id, slot_id, booking_date) VALUES (?, ?, ?, ?, ?)',
-    [id, userId, fieldId, slotId, bookingDate]
-  );
+const createBooking = async (req, res) => {
+  try {
+    const { field_id, slot_id, booking_date, dp_amount } = req.body;
+    const userId = req.user.id;
+
+    if (!field_id || !slot_id || !booking_date || !dp_amount) {
+      return res.status(400).json({ message: 'Semua field wajib diisi' });
+    }
+
+    try {
+      await axios.get(`${process.env.FIELD_SERVICE_URL}/fields/${field_id}`);
+    } catch (err) {
+      return res.status(404).json({ message: 'Lapangan tidak ditemukan' });
+    }
+
+    const bookingId = uuidv4();
+    await bookingModel.createBooking(bookingId, userId, field_id, slot_id, booking_date);
+
+    const paymentId = uuidv4();
+    await paymentModel.createPayment(paymentId, bookingId, 'dp', dp_amount);
+
+    return res.status(201).json({ message: 'Booking berhasil', booking_id: bookingId });
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
 };
 
-const findBookingById = async (id) => {
-  const [rows] = await db.query('SELECT * FROM bookings WHERE id = ?', [id]);
-  return rows[0];
+const getMyBookings = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const page = parseInt(req.query.page) || 1;
+    const perPage = parseInt(req.query.per_page) || 10;
+    const result = await bookingModel.findBookingsByUser(userId, page, perPage);
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
 };
 
-const findBookingsByUser = async (userId, page = 1, perPage = 10) => {
-  const offset = (page - 1) * perPage;
-  const [rows] = await db.query(
-    'SELECT * FROM bookings WHERE user_id = ? LIMIT ? OFFSET ?',
-    [userId, perPage, offset]
-  );
-  const [[{ total }]] = await db.query(
-    'SELECT COUNT(*) as total FROM bookings WHERE user_id = ?',
-    [userId]
-  );
-  return { data: rows, total, page, per_page: perPage };
+const getBookingById = async (req, res) => {
+  try {
+    const booking = await bookingModel.findBookingById(req.params.id);
+    if (!booking) return res.status(404).json({ message: 'Booking tidak ditemukan' });
+    return res.status(200).json(booking);
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
 };
 
-const updateBookingStatus = async (id, status) => {
-  await db.query('UPDATE bookings SET status = ? WHERE id = ?', [status, id]);
+const cancelBooking = async (req, res) => {
+  try {
+    const booking = await bookingModel.findBookingById(req.params.id);
+    if (!booking) return res.status(404).json({ message: 'Booking tidak ditemukan' });
+    await bookingModel.updateBookingStatus(req.params.id, 'cancelled');
+    return res.status(200).json({ message: 'Booking dibatalkan' });
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
 };
 
-module.exports = { createBooking, findBookingById, findBookingsByUser, updateBookingStatus };
+module.exports = { createBooking, getMyBookings, getBookingById, cancelBooking };
