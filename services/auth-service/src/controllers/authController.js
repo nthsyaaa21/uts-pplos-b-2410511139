@@ -21,6 +21,7 @@ const register = async (req, res) => {
 
     return res.status(201).json({ message: 'Registrasi berhasil' });
   } catch (err) {
+    console.error('REGISTER ERROR:', err);
     return res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
@@ -34,6 +35,10 @@ const login = async (req, res) => {
     const user = await userModel.findByEmail(email);
     if (!user)
       return res.status(401).json({ message: 'Email atau password salah' });
+
+    if (!user.password) {
+      return res.status(401).json({ message: 'Akun ini menggunakan OAuth, silakan login via GitHub' });
+    }
 
     const valid = await bcrypt.compare(password, user.password);
     if (!valid)
@@ -56,6 +61,7 @@ const login = async (req, res) => {
 
     return res.status(200).json({ accessToken, refreshToken });
   } catch (err) {
+    console.error('LOGIN ERROR:', err);
     return res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
@@ -79,6 +85,7 @@ const refresh = async (req, res) => {
 
     return res.status(200).json({ accessToken });
   } catch (err) {
+    console.error('REFRESH ERROR:', err);
     return res.status(401).json({ message: 'Refresh token expired atau tidak valid' });
   }
 };
@@ -96,6 +103,7 @@ const logout = async (req, res) => {
 
     return res.status(200).json({ message: 'Logout berhasil' });
   } catch (err) {
+    console.error('LOGOUT ERROR:', err);
     return res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
@@ -107,6 +115,7 @@ const getProfile = async (req, res) => {
     const { password, ...profile } = user;
     return res.status(200).json(profile);
   } catch (err) {
+    console.error('PROFILE ERROR:', err);
     return res.status(500).json({ message: 'Server error', error: err.message });
   }
 };

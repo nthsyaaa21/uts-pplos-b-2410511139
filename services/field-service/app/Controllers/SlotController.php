@@ -10,9 +10,8 @@ class SlotController extends ResourceController
     protected $modelName = 'App\Models\SlotModel';
     protected $format = 'json';
 
-    public function index()
+    public function index($fieldId = null)
     {
-        $fieldId = $this->request->getGet('field_id');
         $page = $this->request->getGet('page') ?? 1;
         $perPage = $this->request->getGet('per_page') ?? 10;
 
@@ -22,19 +21,22 @@ class SlotController extends ResourceController
         return $this->respond($result, 200);
     }
 
-    public function create()
+    public function create($fieldId = null)
     {
         $data = $this->request->getJSON(true);
 
-        if (empty($data['field_id']) || empty($data['day_of_week']) || empty($data['start_time']) || empty($data['end_time'])) {
+        if (!$fieldId) return $this->fail('field_id wajib diisi', 400);
+
+        if (empty($data['day_of_week']) || empty($data['start_time']) || empty($data['end_time'])) {
             return $this->fail('Semua field wajib diisi', 400);
         }
 
+        $data['field_id'] = $fieldId;
         $id = $this->model->insert($data);
         return $this->respondCreated(['id' => $id, 'message' => 'Slot berhasil ditambahkan']);
     }
 
-    public function delete($id = null)
+    public function delete($fieldId = null, $id = null)
     {
         $slot = $this->model->find($id);
         if (!$slot) return $this->failNotFound('Slot tidak ditemukan');

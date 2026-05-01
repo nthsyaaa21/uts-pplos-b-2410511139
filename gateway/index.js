@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
+app.use(express.json());
 
 const limiter = rateLimit({
   windowMs: 60 * 1000,
@@ -16,14 +17,15 @@ app.use(limiter);
 
 const verifyToken = (req, res, next) => {
   const openPaths = [
-    '/api/auth/register',
-    '/api/auth/login',
-    '/api/auth/refresh',
-    '/api/auth/oauth/github',
-    '/api/auth/oauth/github/callback',
+    '/register',
+    '/login',
+    '/refresh',
+    '/oauth/github',
+    '/oauth/github/callback',
   ];
 
-  if (openPaths.includes(req.path)) return next();
+  const isOpen = openPaths.some(path => req.originalUrl.includes(path));
+  if (isOpen) return next();
 
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -42,21 +44,45 @@ const verifyToken = (req, res, next) => {
 app.use(verifyToken);
 
 app.use('/api/auth', createProxyMiddleware({
-  target: process.env.AUTH_SERVICE_URL || 'http://localhost:3001',
+  target: 'http://localhost:3001',
   changeOrigin: true,
-  pathRewrite: { '^/api/auth': '/auth' }
+  pathRewrite: { '^/api/auth': '/auth' },
+  onProxyReq: (proxyReq, req) => {
+    if (req.body) {
+      const bodyData = JSON.stringify(req.body);
+      proxyReq.setHeader('Content-Type', 'application/json');
+      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+      proxyReq.write(bodyData);
+    }
+  }
 }));
 
 app.use('/api/fields', createProxyMiddleware({
-  target: process.env.FIELD_SERVICE_URL || 'http://localhost:3002',
+  target: 'http://localhost:3002',
   changeOrigin: true,
-  pathRewrite: { '^/api/fields': '/fields' }
+  pathRewrite: { '^/api/fields': '/fields' },
+  onProxyReq: (proxyReq, req) => {
+    if (req.body) {
+      const bodyData = JSON.stringify(req.body);
+      proxyReq.setHeader('Content-Type', 'application/json');
+      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+      proxyReq.write(bodyData);
+    }
+  }
 }));
 
 app.use('/api/bookings', createProxyMiddleware({
-  target: process.env.BOOKING_SERVICE_URL || 'http://localhost:3003',
+  target: 'http://localhost:3003',
   changeOrigin: true,
-  pathRewrite: { '^/api/bookings': '/bookings' }
+  pathRewrite: { '^/api/bookings': '/bookings' },
+  onProxyReq: (proxyReq, req) => {
+    if (req.body) {
+      const bodyData = JSON.stringify(req.body);
+      proxyReq.setHeader('Content-Type', 'application/json');
+      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+      proxyReq.write(bodyData);
+    }
+  }
 }));
 
 app.get('/health', (req, res) => res.json({ status: 'gateway ok' }));

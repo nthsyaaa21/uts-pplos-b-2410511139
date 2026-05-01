@@ -6,9 +6,11 @@ const verifyToken = require('../middleware/jwtMiddleware');
 
 router.post('/', verifyToken, bookingController.createBooking);
 router.get('/', verifyToken, bookingController.getMyBookings);
+router.get('/dashboard', verifyToken, bookingController.getDashboard);
 router.get('/:id', verifyToken, bookingController.getBookingById);
 router.delete('/:id', verifyToken, bookingController.cancelBooking);
-router.post('/payment/full', verifyToken, paymentController.payFull);
-router.get('/payment/:booking_id', verifyToken, paymentController.getPayments);
+router.post('/:id/payment/dp', verifyToken, paymentController.payDP);
+router.post('/:id/payment/full', verifyToken, paymentController.payFull);
+router.get('/:id/payment', verifyToken, paymentController.getPayments);
 
 module.exports = router;
